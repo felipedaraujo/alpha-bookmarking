@@ -7,18 +7,20 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%= link_to "Alpha Bookmarking", '#', class: "navbar-brand" %>
+      <%= link_to "Alpha Bookmarking", root_path , class: "navbar-brand" %>
     </div>
     <div class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "My Links", '#' %></li>
-        <li><%= link_to "User Name", '#' %></li>
-        <li><%= link_to "Home", '#' %></li>
-        <li><%= link_to "Log in", '#' %></li>
-      </ul>
-      <form class="navbar-form navbar-right">
-        <input type="text" class="form-control" placeholder="Search...">
-      </form>
+      <% unless current_page?(root_path) %>
+        <form class="navbar-form navbar-right">
+          <input type="text" class="form-control" placeholder="Search...">
+        </form>
+        <ul class="nav navbar-nav navbar-right">
+            <li><%= link_to "My Links", bookmarks_path %></li>
+            <li>
+              <%= link_to "+ Add Link", new_bookmark_path %>
+            </li>
+        </ul>
+      <% end %>
     </div>
   </div>
 </header>

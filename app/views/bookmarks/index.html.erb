@@ -1,0 +1,39 @@
+<% @bookmarks.each do |bookmark| %>
+  <div>
+    <div>
+      <p>
+        <span class="lead"><%= link_to bookmark.title, '#' %></span>
+        <!--%= domain_name(bookmark) %-->
+      </p>
+    </div>
+    <div>
+      <div>
+        <ul>
+          <!--% bookmark.tags.each do |tag| %-->
+            <!--li></li-->
+            <!-- WILL BE GREAT TURN TAG IN A LINK -->
+          <!--% end %-->
+        </ul>
+      </div>
+      <div>
+        <!-- COPY URL IS GONNA BE A METHOD -->
+        <form class="form-inline" role="form">
+          
+          <div class="col-xs-3 col-sm-3">
+            <div class="input-group">
+              <input type="text" class="form-control">
+              <span class="input-group-btn">
+                <%= link_to 'copy', '#', class: "btn btn-primary" %>
+              </span>
+            </div>
+          </div>
+          <%= link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary" %>
+          <%= link_to 'delete', bookmark, class: "btn btn-primary", 
+                                          method: :delete, 
+                                          data: { confirm: 'Are you sure?' } %>
+
+        </form>
+      </div>
+    </div>
+  </div>
+<% end %> 
