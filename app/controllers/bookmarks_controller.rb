@@ -2,7 +2,7 @@ class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
 
   def index
-    @bookmarks = Bookmark.all
+    @bookmarks = Bookmark.paginate(page: params[:page], :per_page => 20)
   end
 
   def show
@@ -21,11 +21,11 @@ class BookmarksController < ApplicationController
 
     respond_to do |format|
       if @bookmark.save
-        format.html { redirect_to @Bookmark, notice: 'Bookmark was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @Bookmark }
+        format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
+        format.json { render action: 'show', status: :created, location: @bookmark }
       else
         format.html { render action: 'new' }
-        format.json { render json: @Bookmark.errors, status: :unprocessable_entity }
+        format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -59,7 +59,7 @@ class BookmarksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
-      params.require(:bookmark).permit(:url, :title)
+      params.require(:bookmark).permit(:url, :title, :domain_id)
     end
 
 
