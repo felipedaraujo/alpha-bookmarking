@@ -1,6 +1,6 @@
 AlphaBookmarking::Application.routes.draw do
   resources :bookmarks
-  resources :domains, only: [:new, :create, :show]
+  resources :domains, only: [:show, :new, :create]
   root 'static_pages#home'
   match '/about', to: "static_pages#about", via: 'get'
 

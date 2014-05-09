@@ -1,40 +1,37 @@
-<% @domain.bookmarks.each do |bookmark| %>
+<div>
+  <div>
+    <p>
+      <span class="lead"><%= link_to bookmark.title, bookmark.url, target: "_blank" %></span>
+      <% if current_page?(bookmarks_path) %>
+        <%= link_to bookmark.domain.name,  bookmark.domain %>
+      <% end %>
+    </p>
+  </div>
   <div>
     <div>
-      <p>
-        <span class="lead"><%= link_to bookmark.title, '#' %></span>
-        <% if current_page?(bookmarks_path) %>
-          <% bookmark.domain %>
-        <% end %>
-      </p>
+      <ul>
+        <!--% bookmark.tags.each do |tag| %-->
+        <!--li></li-->
+        <!-- WILL BE GREAT TURN TAG IN A LINK -->
+        <!--% end %-->
+      </ul>
     </div>
     <div>
-      <div>
-        <ul>
-          <!--% bookmark.tags.each do |tag| %-->
-          <!--li></li-->
-          <!-- WILL BE GREAT TURN TAG IN A LINK -->
-          <!--% end %-->
-        </ul>
-      </div>
-      <div>
-        <!-- COPY URL IS GONNA BE A METHOD -->
-        <form class="form-inline" role="form">
-          <div class="col-xs-3 col-sm-3">
-            <div class="input-group">
-              <input type="text" class="form-control">
-              <span class="input-group-btn">
-                <%= link_to 'copy', '#', class: "btn btn-primary" %>
-              </span>
-            </div>
+      <!-- COPY URL IS GONNA BE A METHOD -->
+      <form class="form-inline" role="form">
+        <div class="col-xs-3 col-sm-3">
+          <div class="input-group">
+            <input type="text" class="form-control">
+            <span class="input-group-btn">
+              <%= link_to 'copy', '#', class: "btn btn-primary" %>
+            </span>
           </div>
-          <%= link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary" %>
-          <%= link_to 'delete', bookmark, class: "btn btn-primary", 
-          method: :delete, 
-          data: { confirm: 'Are you sure?' } %>
-        </form>
-      </div>
+        </div>
+        <%= link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary" %>
+        <%= link_to 'delete', bookmark, class: "btn btn-primary", 
+        method: :delete, 
+        data: { confirm: 'Are you sure?' } %>
+      </form>
     </div>
   </div>
-<% end %> 
-<%= will_paginate @bookmarks %>
+</div>

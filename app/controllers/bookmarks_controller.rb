@@ -17,7 +17,7 @@ class BookmarksController < ApplicationController
   
 
   def create
-    @bookmark = Bookmark.new(bookmark_params)
+    @bookmark = domain.bookmarks.build(bookmark_params)
 
     respond_to do |format|
       if @bookmark.save
@@ -59,7 +59,7 @@ class BookmarksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
-      params.require(:bookmark).permit(:url, :title, :domain_id)
+      params.require(:bookmark).permit(:url, :title)
     end
 
 
