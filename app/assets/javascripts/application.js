@@ -14,3 +14,22 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  $("#add_link").click(function() {
+    $("#bookmark_title").prop('disabled', false);
+    $("#bookmark_list").prop('disabled', false);
+    
+    $("#bookmark_title").focus();
+
+    $("#add_link").hide();
+    $("input[type='submit']").show();
+    
+    var url = $("#bookmark_url").val();
+    $.get('/add_link', { url: url}, 
+      function(data){
+        $("#bookmark_title").val(data.title);
+        $("#bookmark_list").val(data.list);  
+    });
+  });
+});

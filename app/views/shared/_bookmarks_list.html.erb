@@ -11,8 +11,9 @@
     <div>
       <ul>
         <!--% bookmark.tags.each do |tag| %-->
-        <!--li></li-->
-        <!-- WILL BE GREAT TURN TAG IN A LINK -->
+          <!--li-->
+            <!--%= link_to bookmark.tag.name,  bookmark.tag %-->
+          <!--/li-->
         <!--% end %-->
       </ul>
     </div>
@@ -21,14 +22,14 @@
       <form class="form-inline" role="form">
         <div class="col-xs-3 col-sm-3">
           <div class="input-group">
-            <input type="text" class="form-control">
+            <input type="text" class="form-control input-sm">
             <span class="input-group-btn">
-              <%= link_to 'copy', '#', class: "btn btn-primary" %>
+              <%= link_to 'copy', '#', class: "btn btn-primary btn-sm" %>
             </span>
           </div>
         </div>
-        <%= link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary" %>
-        <%= link_to 'delete', bookmark, class: "btn btn-primary", 
+        <%= link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary btn-sm" %>
+        <%= link_to 'delete', bookmark, class: "btn btn-primary btn-sm", 
         method: :delete, 
         data: { confirm: 'Are you sure?' } %>
       </form>

@@ -1,3 +1,4 @@
 class Tag < ActiveRecord::Base
-  belongs_to :bookmark
+  has_many :taggings
+  has_many :bookmarks, :through => :taggings
 end

@@ -17,11 +17,11 @@ class BookmarksController < ApplicationController
   
 
   def create
-    @bookmark = domain.bookmarks.build(bookmark_params)
-
+    @bookmark = Bookmark.new(bookmark_params)
+    
     respond_to do |format|
       if @bookmark.save
-        format.html { redirect_to @bookmark, notice: 'Bookmark was successfully created.' }
+        format.html { redirect_to bookmarks_path, notice: 'Bookmark was successfully created.' }
         format.json { render action: 'show', status: :created, location: @bookmark }
       else
         format.html { render action: 'new' }
@@ -48,6 +48,11 @@ class BookmarksController < ApplicationController
       format.html { redirect_to bookmarks_url }
       format.json { head :no_content }
     end
+  end
+
+  def add
+    page = MetaInspector.new(params[:url])
+    render json: { title: page.title, list: page.meta['keywords'] }
   end
 
 
