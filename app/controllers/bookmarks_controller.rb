@@ -13,6 +13,12 @@ class BookmarksController < ApplicationController
   end
 
   def edit
+    # if @bookmark.tags
+    #   @bookmark.tags.each do |n|
+    #     tag_list = n.name
+    #   end
+    #   {url: @bookmark.url, title: @bookmark.title, tag_list: tag_list}
+    # end
   end
   
 
@@ -21,7 +27,8 @@ class BookmarksController < ApplicationController
     
     respond_to do |format|
       if @bookmark.save
-        format.html { redirect_to bookmarks_path, notice: 'Bookmark was successfully created.' }
+        flash[:success] = 'Bookmark was successfully created.'
+        format.html { redirect_to bookmarks_path }
         format.json { render action: 'show', status: :created, location: @bookmark }
       else
         format.html { render action: 'new' }
@@ -33,7 +40,8 @@ class BookmarksController < ApplicationController
   def update
     respond_to do |format|
       if @bookmark.update(bookmark_params)
-        format.html { redirect_to @bookmark, notice: 'Bookmark was successfully updated.' }
+        flash[:success] = 'Bookmark was successfully updated.'
+        format.html { redirect_to bookmarks_path }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -45,6 +53,7 @@ class BookmarksController < ApplicationController
   def destroy
     @bookmark.destroy
     respond_to do |format|
+      flash[:warning] = 'Bookmark was successfully deleted.'
       format.html { redirect_to bookmarks_url }
       format.json { head :no_content }
     end
@@ -53,6 +62,26 @@ class BookmarksController < ApplicationController
   def add
     page = MetaInspector.new(params[:url])
     render json: { title: page.title, list: page.meta['keywords'] }
+  end
+
+  def search
+    @key = params[:key]
+    @bookmarks = Bookmark.where("lower(url) like lower('%#{params[:key]}%') 
+                            OR lower(title) like lower('%#{params[:key]}%')")
+    if @bookmarks.empty?
+      flash[:danger] = 'Link or Title were not found!'
+      redirect_to bookmarks_path
+    end
+
+  end
+
+  def search_by_tag
+    @key = params[:key]
+    @tags = Tag.where("lower(name) like lower('%#{params[:key]}%')")
+    if @tags.empty?
+      flash[:danger] = 'Tag was not found!'
+      redirect_to bookmarks_path
+    end
   end
 
   private

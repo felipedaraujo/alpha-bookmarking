@@ -2,8 +2,8 @@
   <div>
     <p>
       <span class="lead"><%= link_to bookmark.title, bookmark.url, target: "_blank" %></span>
-      <% if current_page?(bookmarks_path) %>
-        <%= link_to bookmark.domain.name,  bookmark.domain %>
+      <% unless current_page?(controller: 'domains', action: 'show') %>
+        <%= link_to bookmark.domain.name, bookmark.domain %>
       <% end %>
     </p>
   </div>
@@ -23,7 +23,7 @@
           <div class="input-group">
             <%= f.text_field :short_url, class: "form-control input-sm" %>
             <span class="input-group-btn">
-              <%= link_to 'copy', '#copyLink', id: "copy", class: "btn btn-primary btn-sm" %>
+              <%= link_to 'copy me!', '#copyLink', class: "btn btn-primary btn-sm copy" %>
             </span>
           </div>
         </div>

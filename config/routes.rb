@@ -2,9 +2,11 @@ AlphaBookmarking::Application.routes.draw do
   resources :bookmarks
   resources :domains, only: [:show, :new, :create]
   root 'static_pages#home'
-  match '/about',    to: "static_pages#about", via: 'get'
-  match '/add_link', to: "bookmarks#add", via: 'get'
-
+  match '/about',         to: "static_pages#about",      via: 'get'
+  match '/add_link',      to: "bookmarks#add",           via: 'get'
+  match "/search",        to: "bookmarks#search",        via: 'get'
+  match "/search_by_tag", to: "bookmarks#search_by_tag", via: 'get'
+  match "/domains",   to: "domains#show"           , via: 'get'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

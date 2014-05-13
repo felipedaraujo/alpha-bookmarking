@@ -71,3 +71,19 @@ p {
   margin-top: 45px;
   @include box_sizing;
 }
+
+/* autocomplete */
+
+.ui-helper-hidden-accessible{
+  display: none;
+}
+
+.autocomplete {
+  background-color: white;
+  border: 1px solid #eee;
+  border-top: none;
+  list-style: none;
+  margin: 0; 
+  width: 192px;
+  z-index: 1040;
+}

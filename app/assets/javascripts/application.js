@@ -12,6 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.ui.autocomplete
 //= require turbolinks
 //= require_tree .
 
@@ -20,34 +21,38 @@ $(document).ready(function() {
   $("#add_link").click(function() {
     $("#bookmark_title").prop('disabled', false);
     $("#bookmark_tag_list").prop('disabled', false);
-    
+
     $("#bookmark_title").focus();
 
     $("#add_link").hide();
     $("input[type='submit']").show();
-    
+
     var url = $("#bookmark_url").val();
-    $.get('/add_link', { url: url}, 
-      function(data){
+    $.get('/add_link', {
+        url: url
+      },
+      function(data) {
         $("#bookmark_title").val(data.title);
-        $("#bookmark_tag_list").val(data.list);  
-    });
+        $("#bookmark_tag_list").val(data.list);
+      });
   });
 
-// main.js
-var client = new ZeroClipboard( document.getElementById("#copy") );
 
-client.on( "ready", function( readyEvent ) {
-  // alert( "ZeroClipboard SWF is ready!" );
+  $('a.copy').click(function() {
+    window.prompt("Push Ctrl+C to copy",
+      $(this).parent().prev().val());
+  });
 
-  client.on( "aftercopy", function( event ) {
-    // `this` === `client`
-    // `event.target` === the element that was clicked
-    event.target.style.display = "none";
-    alert("Copied text to clipboard: " + event.data["text/plain"] );
-  } );
-} );
+  $("#searchBtn").click(function(){
+    if($("#searchInput").val().substr(0,1) == '#'){
+      var input = $("#searchInput").val();
+      window.location.href = "/search_by_tag?key=" + input.substr(1,input.length - 1);
+    }
+    else{
+      window.location.href = "/search?key=" + $("#searchInput").val();
+    }  
+  });
+
 
 });
-
 

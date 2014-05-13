@@ -1,10 +1,8 @@
 class Bookmark < ActiveRecord::Base
   attr_accessor :tag_list
   belongs_to :domain
-  has_many :bookmarks_tags
+  has_many :bookmarks_tags, dependent: :destroy
   has_many :tags, :through => :bookmarks_tags
-  
-  accepts_nested_attributes_for :tags
 
   default_scope -> { order('created_at DESC') }
   
