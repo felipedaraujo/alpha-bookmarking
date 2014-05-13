@@ -10,21 +10,20 @@
   <div>
     <div>
       <ul>
-        <!--% bookmark.tags.each do |tag| %-->
-          <!--li-->
-            <!--%= link_to bookmark.tag.name,  bookmark.tag %-->
-          <!--/li-->
-        <!--% end %-->
+        <% bookmark.tags.each do |tag| %>
+          <li>
+            <%= link_to tag.name,  "#" %>
+          </li>
+        <% end %>
       </ul>
     </div>
     <div>
-      <!-- COPY URL IS GONNA BE A METHOD -->
-      <form class="form-inline" role="form">
+      <%= form_for(bookmark) do |f| %>
         <div class="col-xs-3 col-sm-3">
           <div class="input-group">
-            <input type="text" class="form-control input-sm">
+            <%= f.text_field :short_url, class: "form-control input-sm" %>
             <span class="input-group-btn">
-              <%= link_to 'copy', '#', class: "btn btn-primary btn-sm" %>
+              <%= link_to 'copy', '#copyLink', id: "copy", class: "btn btn-primary btn-sm" %>
             </span>
           </div>
         </div>
@@ -32,7 +31,7 @@
         <%= link_to 'delete', bookmark, class: "btn btn-primary btn-sm", 
         method: :delete, 
         data: { confirm: 'Are you sure?' } %>
-      </form>
+      <% end %>    
     </div>
   </div>
 </div>

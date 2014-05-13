@@ -1,21 +1,21 @@
 class Bookmark < ActiveRecord::Base
-  attr_reader :list
-  
+  attr_accessor :tag_list
   belongs_to :domain
-  has_many :taggings
-  has_many :tag, :through => :taggings
-
-  has_and_belongs_to_many :tags
+  has_many :bookmarks_tags
+  has_many :tags, :through => :bookmarks_tags
   
+  accepts_nested_attributes_for :tags
+
   default_scope -> { order('created_at DESC') }
   
   before_create :create_domain
-  before_create :create_tags
+  before_create :create_short_url
+  before_save   :create_tags
   
   validates :url, presence: true,
                   format:   { with: URI.regexp },
-                  on: :create
-  # validates :domain_id, presence: true
+                  on: :create,
+                  uniqueness: true
 
   private
    def create_domain
@@ -24,14 +24,21 @@ class Bookmark < ActiveRecord::Base
    end
 
   def create_tags
-    var = "list, rails, tutor".split(',')
-    var.each do |tag_name|
-      Tag.where(name: tag_name).first_or_create
+    tag_array = tag_list.split(',')
+    tag_array.each do |tag_name|
+      self.tags << Tag.where(name: tag_name.strip).first_or_create
     end
   end
 
-  def tagging
+  def create_short_url
+    token = "18c57dc7ba4937d30de10f0e0e73a16c17ca29c0"
+    api_address = "https://api-ssl.bitly.com"
     
+    encoded = URI::escape(url)
+    uri = URI.parse("#{api_address}/v3/shorten?" +
+                    "access_token=#{token}&longUrl=#{encoded}")
+    
+    response = Net::HTTP.get(uri)
+    self.short_url = ActiveSupport::JSON.decode(response)["data"]["url"]
   end
-
 end

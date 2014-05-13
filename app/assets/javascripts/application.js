@@ -15,10 +15,11 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
+$(document).ready(function() {
+
   $("#add_link").click(function() {
     $("#bookmark_title").prop('disabled', false);
-    $("#bookmark_list").prop('disabled', false);
+    $("#bookmark_tag_list").prop('disabled', false);
     
     $("#bookmark_title").focus();
 
@@ -29,7 +30,24 @@ $(function() {
     $.get('/add_link', { url: url}, 
       function(data){
         $("#bookmark_title").val(data.title);
-        $("#bookmark_list").val(data.list);  
+        $("#bookmark_tag_list").val(data.list);  
     });
   });
+
+// main.js
+var client = new ZeroClipboard( document.getElementById("#copy") );
+
+client.on( "ready", function( readyEvent ) {
+  // alert( "ZeroClipboard SWF is ready!" );
+
+  client.on( "aftercopy", function( event ) {
+    // `this` === `client`
+    // `event.target` === the element that was clicked
+    event.target.style.display = "none";
+    alert("Copied text to clipboard: " + event.data["text/plain"] );
+  } );
+} );
+
 });
+
+

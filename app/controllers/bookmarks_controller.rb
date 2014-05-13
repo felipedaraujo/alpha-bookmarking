@@ -55,7 +55,6 @@ class BookmarksController < ApplicationController
     render json: { title: page.title, list: page.meta['keywords'] }
   end
 
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_bookmark
@@ -64,7 +63,7 @@ class BookmarksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def bookmark_params
-      params.require(:bookmark).permit(:url, :title)
+      params.require(:bookmark).permit(:url, :title, :tag_list)
     end
 
 
