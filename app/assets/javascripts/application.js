@@ -22,7 +22,10 @@ $(document).ready(function() {
     var url = $("#bookmark_url").val()
 
     if ($.trim(url).length > 0){
-
+      if (url && !url.match(/^http([s]?):\/\/.*/)) {
+        $("#bookmark_url").val('http://' + url);
+      }
+     
       $("#bookmark_title").prop('disabled', false);
       $("#bookmark_tag_list").prop('disabled', false);
 
