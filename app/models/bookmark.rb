@@ -15,10 +15,6 @@ class Bookmark < ActiveRecord::Base
                   on: :create,
                   uniqueness: true
 
-  # def tag_list
-  #   attributes[tag_list: self.tags.join(',')]
-  # end
-
   private
    def create_domain
      domain_name = URI.parse(url).host
@@ -35,11 +31,9 @@ class Bookmark < ActiveRecord::Base
   def create_short_url
     token = "18c57dc7ba4937d30de10f0e0e73a16c17ca29c0"
     api_address = "https://api-ssl.bitly.com"
-    
     encoded = URI::escape(url)
     uri = URI.parse("#{api_address}/v3/shorten?" +
                     "access_token=#{token}&longUrl=#{encoded}")
-    
     response = Net::HTTP.get(uri)
     self.short_url = ActiveSupport::JSON.decode(response)["data"]["url"]
   end

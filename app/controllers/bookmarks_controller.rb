@@ -82,7 +82,7 @@ class BookmarksController < ApplicationController
   def search_by_tag
     @key = params[:key]
     @tags = Tag.where("lower(name) like lower('%#{params[:key]}%')")
-    if @tags.empty?
+    if @tags.blank?
       flash[:danger] = 'Tag was not found!'
       redirect_to bookmarks_path
     end

@@ -72,18 +72,40 @@ p {
   @include box_sizing;
 }
 
-/* autocomplete */
-
-.ui-helper-hidden-accessible{
-  display: none;
+/* bookmark */
+.bookmark{
+  border-bottom: 1px solid #eee;
+  padding: 15px 20px;
 }
 
-.autocomplete {
-  background-color: white;
-  border: 1px solid #eee;
-  border-top: none;
+/* title and domain */
+.title_domain{
+  padding-left: 45px;
+  padding-right: 45px;
+}
+
+.domain{
+  color: $gray-light;
+}
+
+/* copy, edit, and delete*/
+
+.col-xs-3{
+  margin-left: 30px;
+}
+
+.edit{
+  margin-right: 10px;
+}
+
+/* tags */
+
+.tags{
   list-style: none;
-  margin: 0; 
-  width: 192px;
-  z-index: 1040;
+  li {
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
 }
+

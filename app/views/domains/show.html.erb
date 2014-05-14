@@ -1,4 +1,4 @@
-<h3><%= @domain.name %></h3>
+<h3 class="center"><%= @domain.name %></h3>
 <% @domain.bookmarks.each do |bookmark| %>
   <%= render 'shared/bookmarks_list', bookmark: bookmark %>
 <% end %>

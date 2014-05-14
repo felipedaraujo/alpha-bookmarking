@@ -1,4 +1,4 @@
-<h3>Current Filter: <%= "\"#{@key}\"" %></h3>
+<h3 class="center">Current Filter: <%= "\"#{@key}\"" %></h3>
 <% @bookmarks.each do |bookmark| %>
   <%= render 'shared/bookmarks_list', bookmark: bookmark %>
 <% end %>
