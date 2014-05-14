@@ -15,6 +15,10 @@ class Bookmark < ActiveRecord::Base
                   on: :create,
                   uniqueness: true
 
+  # def tag_list
+  #   attributes[tag_list: self.tags.join(',')]
+  # end
+
   private
    def create_domain
      domain_name = URI.parse(url).host

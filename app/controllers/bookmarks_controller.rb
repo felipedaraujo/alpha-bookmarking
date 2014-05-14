@@ -1,5 +1,5 @@
 class BookmarksController < ApplicationController
-  before_action :set_bookmark, only: [:show, :edit, :update, :destroy]
+  before_action :set_bookmark, only: [:show, :update, :destroy]
 
   def index
     @bookmarks = Bookmark.paginate(page: params[:page], :per_page => 20)
@@ -13,12 +13,14 @@ class BookmarksController < ApplicationController
   end
 
   def edit
-    # if @bookmark.tags
-    #   @bookmark.tags.each do |n|
-    #     tag_list = n.name
-    #   end
-    #   {url: @bookmark.url, title: @bookmark.title, tag_list: tag_list}
-    # end
+    @bookmark = set_bookmark
+    if @bookmark.tags
+      tag_list = @bookmark.tags.map do |n| 
+        n.name
+      end
+    end
+    @bookmark.tag_list = tag_list.join(", ")
+
   end
   
 
@@ -31,6 +33,7 @@ class BookmarksController < ApplicationController
         format.html { redirect_to bookmarks_path }
         format.json { render action: 'show', status: :created, location: @bookmark }
       else
+        flash[:danger] = "Error! Bookmark couldn't be created."
         format.html { render action: 'new' }
         format.json { render json: @bookmark.errors, status: :unprocessable_entity }
       end
@@ -44,6 +47,7 @@ class BookmarksController < ApplicationController
         format.html { redirect_to bookmarks_path }
         format.json { head :no_content }
       else
+        flash[:danger] = "Error! Bookmark couldn't be updated."
         format.html { render action: 'edit' }
         format.json { render json: @bookamrk.errors, status: :unprocessable_entity }
       end

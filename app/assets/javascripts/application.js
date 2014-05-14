@@ -19,22 +19,31 @@
 $(document).ready(function() {
 
   $("#add_link").click(function() {
-    $("#bookmark_title").prop('disabled', false);
-    $("#bookmark_tag_list").prop('disabled', false);
+    var url = $("#bookmark_url").val()
 
-    $("#bookmark_title").focus();
+    if ($.trim(url).length > 0){
 
-    $("#add_link").hide();
-    $("input[type='submit']").show();
+      $("#bookmark_title").prop('disabled', false);
+      $("#bookmark_tag_list").prop('disabled', false);
 
-    var url = $("#bookmark_url").val();
-    $.get('/add_link', {
-        url: url
-      },
-      function(data) {
-        $("#bookmark_title").val(data.title);
-        $("#bookmark_tag_list").val(data.list);
-      });
+      $("#bookmark_title").focus();
+
+      $("#add_link").hide();
+      $("input[type='submit']").show();
+
+      var url = $("#bookmark_url").val();
+      $.get('/add_link', {
+          url: url
+        },
+        function(data) {
+          $("#bookmark_title").val(data.title);
+          $("#bookmark_tag_list").val(data.list);
+        });
+    }else{
+      alert("The URL field can't be blank");
+      $("#bookmark_url").val("")
+      $("#bookmark_url").focus();
+    }
   });
 
 
