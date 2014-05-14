@@ -15,6 +15,8 @@ class Bookmark < ActiveRecord::Base
                   on: :create,
                   uniqueness: true
 
+  validates :title, length: { maximum: 85 }
+
   private
    def create_domain
      domain_name = URI.parse(url).host

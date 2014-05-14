@@ -55,16 +55,29 @@ $(document).ready(function() {
       $(this).parent().prev().val());
   });
 
-  $("#searchBtn").click(function(){
-    if($("#searchInput").val().substr(0,1) == '#'){
-      var input = $("#searchInput").val();
-      window.location.href = "/search_by_tag?key=" + input.substr(1,input.length - 1);
+  $(document).keypress(function(e) {
+    if(e.which == 13) {
+      search($("#searchInput").val());
     }
-    else{
-      window.location.href = "/search?key=" + $("#searchInput").val();
-    }  
+  });
+
+  $("#searchBtn").click(function(){
+      search($("#searchInput").val());
   });
 
 
 });
 
+
+function search(input) {
+
+  if(input.substr(0,1) == '#'){
+    window.location.href = "/search_by_tag?key=" + input.substr(1,input.length - 1);
+  } 
+  else if( input == "" || input.trim() == "") {
+    alert("Search can't be blank!");
+  }
+  else{
+    window.location.href = "/search?key=" + input;
+  }
+}
