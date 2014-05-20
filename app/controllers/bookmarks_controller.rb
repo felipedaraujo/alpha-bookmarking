@@ -69,9 +69,9 @@ class BookmarksController < ApplicationController
   end
 
   def search
-    @key = params[:key]
-    @bookmarks = Bookmark.where("url like ? 
-                                OR title like ?", "%#{@key}%", "%#{@key}%")
+    @key = params[:commit]
+    # @bookmarks = Bookmark.where("url like ? OR title like ?", "%#{@key}%", "%#{@key}%")
+    @bookmarks = Bookmark.matches_text(@key)
     if @bookmarks.blank?
       flash[:danger] = 'Link or Title were not found!'
       redirect_to bookmarks_path
@@ -79,7 +79,7 @@ class BookmarksController < ApplicationController
   end
 
   def search_by_tag
-    @key = params[:key]
+    @key = params[:commit]
     @tags = Tag.where("name like ?", "%#{@key}%")
     if @tags.blank?
       flash[:danger] = 'Tag was not found!'

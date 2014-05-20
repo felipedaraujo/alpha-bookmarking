@@ -11,10 +11,10 @@
     </div>
     <div class="navbar-collapse collapse">
       <% unless current_page?(root_path) %>
-        <form class="navbar-form navbar-right" role="form">
+        <form id="searchForm" class="navbar-form navbar-right" role="form">
           <div class="form-group">
             <input type="text" id="searchInput" placeholder="links, titles, or #tags..." class="form-control">
-            <button type="button" id="searchBtn" class="btn btn-success">
+            <button type="submit" id="searchBtn" class="btn btn-success">
               <span class="glyphicon glyphicon-search"></span> Search
             </button>
           </div>

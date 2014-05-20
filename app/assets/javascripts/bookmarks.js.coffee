@@ -31,17 +31,23 @@ jQuery ->
   $('a.copy').click ->
     window.prompt("Push Ctrl+C to copy", $(this).parent().prev().val());
 
-  $(document).keypress (e) ->
-    search($("#searchInput").val()) if(e.which == 13)
-  
-  $("#searchBtn").click ->
+  $("#searchForm").submit (e) ->
+    e.preventDefault()
     search($("#searchInput").val())
+  
+  # $("#searchInput").keypress (e) ->
+  #   if(e.which == 13)
+  #     e.preventDefault()
+  #     search($("#searchInput").val()) 
+  
+  # $("#searchBtn").click ->
+  #   search($("#searchInput").val())
 
 search = (input) ->
   if input.substr(0,1) == '#'
     tag = input.substr(1,input.length - 1)
-    window.location.href = "/search_by_tag?key=" + tag
+    window.location.href = "/search_by_tag?commit=" + tag
   else if  '' in [input, input.trim()]
     alert "Search can't be blank!"
   else
-    window.location.href = "/search?key=" + input
+    window.location.href = "/search?commit=" + input
