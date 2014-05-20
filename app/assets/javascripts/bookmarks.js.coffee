@@ -34,14 +34,6 @@ jQuery ->
   $("#searchForm").submit (e) ->
     e.preventDefault()
     search($("#searchInput").val())
-  
-  # $("#searchInput").keypress (e) ->
-  #   if(e.which == 13)
-  #     e.preventDefault()
-  #     search($("#searchInput").val()) 
-  
-  # $("#searchBtn").click ->
-  #   search($("#searchInput").val())
 
 search = (input) ->
   if input.substr(0,1) == '#'

@@ -30,7 +30,7 @@ class Bookmark < ActiveRecord::Base
   end
 
   def create_short_url
-    token = "18c57dc7ba4937d30de10f0e0e73a16c17ca29c0"
+    token = ENV["BITLY_TOKEN"]
     api_address = "https://api-ssl.bitly.com"
     encoded = URI::escape(url)
     uri = URI.parse("#{api_address}/v3/shorten?" +

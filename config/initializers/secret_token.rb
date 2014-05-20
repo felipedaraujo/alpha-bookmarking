@@ -24,4 +24,4 @@ def secure_token
   end
 end
 
-AlphaBookmarking::Application.config.secret_key_base = '2d649eaa6e86b5cd7f5d3b0f6e200025bdc8efbe1e8d988db7d7969d5a8fe5069d20384930b097348d484c79a1609d8cbe167aa54368a1c1f4d9616a5e388c29'
+AlphaBookmarking::Application.config.secret_key_base = ENV["SECRET_TOKEN"]
