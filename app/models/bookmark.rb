@@ -25,9 +25,7 @@ class Bookmark < ActiveRecord::Base
 
   def create_tags
     tag_array = tag_list.split(',')
-    tag_array.each do |tag_name|
-      self.tags << Tag.where(name: tag_name.strip).first_or_create
-    end
+    self.tags = tag_array.map { |tag_name| Tag.where(name: tag_name.strip).first_or_create }
   end
 
   def create_short_url

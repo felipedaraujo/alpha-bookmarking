@@ -70,18 +70,17 @@ class BookmarksController < ApplicationController
 
   def search
     @key = params[:key]
-    @bookmarks = Bookmark.where("lower(url) like lower('%#{params[:key]}%') 
-                            OR lower(title) like lower('%#{params[:key]}%')")
-    if @bookmarks.empty?
+    @bookmarks = Bookmark.where("url like ? 
+                                OR title like ?", "%#{@key}%", "%#{@key}%")
+    if @bookmarks.blank?
       flash[:danger] = 'Link or Title were not found!'
       redirect_to bookmarks_path
     end
-
   end
 
   def search_by_tag
     @key = params[:key]
-    @tags = Tag.where("lower(name) like lower('%#{params[:key]}%')")
+    @tags = Tag.where("name like ?", "%#{@key}%")
     if @tags.blank?
       flash[:danger] = 'Tag was not found!'
       redirect_to bookmarks_path

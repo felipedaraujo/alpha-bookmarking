@@ -34,7 +34,6 @@ $(document).ready(function() {
       $("#add_link").hide();
       $("input[type='submit']").show();
 
-      var url = $("#bookmark_url").val();
       $.get('/add_link', {
           url: url
         },
@@ -72,7 +71,8 @@ $(document).ready(function() {
 function search(input) {
 
   if(input.substr(0,1) == '#'){
-    window.location.href = "/search_by_tag?key=" + input.substr(1,input.length - 1);
+    var tag = input.substr(1,input.length - 1)
+    window.location.href = "/search_by_tag?key=" + tag;
   } 
   else if( input == "" || input.trim() == "") {
     alert("Search can't be blank!");
