@@ -10,6 +10,7 @@ gem 'bootstrap-will_paginate', '~> 0.0.10'
 gem 'metainspector'
 gem 'haml'
 gem 'haml-rails'
+gem 'figaro'
 
 group :development, :test do
   gem 'sqlite3', '1.3.8'
