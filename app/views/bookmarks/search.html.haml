@@ -1,0 +1,6 @@
+%h3.center
+  Current Filter:
+  = "\"#{@key}\""
+- @bookmarks.each do |bookmark|
+  = render 'shared/bookmarks_list', bookmark: bookmark
+

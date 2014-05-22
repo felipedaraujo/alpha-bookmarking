@@ -1,0 +1,14 @@
+.row
+  .col-md-6.col-md-offset-3
+    = form_for(@bookmark) do |f|
+      .form-group
+        = f.text_field :url, class: "form-control", placeholder: "Add a new Link"
+      = render 'form', f: f
+      = link_to "Add link", "#addLink", id: "add_link", class: "btn btn-primary"
+
+:coffee
+  jQuery ->
+    $("input[type='submit']").hide()
+    $("#bookmark_url").focus()
+    $("#bookmark_title").val("").prop('disabled', true)
+    $("#bookmark_tag_list").val("").prop('disabled', true)

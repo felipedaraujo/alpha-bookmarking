@@ -4,7 +4,6 @@ class Bookmark < ActiveRecord::Base
   has_many :bookmarks_tags, dependent: :destroy
   has_many :tags, :through => :bookmarks_tags
 
-  # default_scope -> { order('created_at DESC') }
   scope :matches_text, -> (key) { where("url like ? OR title like ?", "%#{key}%", "%#{key}%") }
   
   before_create :create_domain

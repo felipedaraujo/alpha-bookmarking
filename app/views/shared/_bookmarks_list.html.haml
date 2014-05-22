@@ -1,0 +1,22 @@
+.bookmark.row
+  .title_domain
+    %p
+      %span.lead
+        = link_to bookmark.title, bookmark.url, target: "_blank"
+      
+      - unless current_page?(controller: 'domains', action: 'show')
+        = link_to bookmark.domain.name, bookmark.domain, class: "domain"
+  %div
+    = form_for(bookmark) do |f|
+      .col-xs-3
+        .input-group
+          = f.text_field :short_url, class: "form-control input-sm"
+          %span.input-group-btn
+            = link_to 'copy me!', '#copyLink', class: "btn btn-primary btn-sm copy"
+
+      = link_to 'edit', edit_bookmark_path(bookmark), class: "btn btn-primary btn-sm edit"
+      = link_to 'delete', bookmark, class: "btn btn-primary btn-sm", method: :delete, data: { confirm: 'Are you sure?' }
+  %div
+    %ul.tags
+      - bookmark.tags.each do |tag|
+        %li= link_to tag.name, tag, class: "btn btn-info btn-xs"

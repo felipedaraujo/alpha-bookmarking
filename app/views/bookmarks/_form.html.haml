@@ -1,0 +1,9 @@
+.form-group
+  = f.text_field :title, class: "form-control", placeholder: "Title"
+
+.form-group
+  = f.text_field :tag_list, class: "form-control", placeholder: "Tags"
+  %p.help-block Separated by comma   
+
+= link_to "Cancel", bookmarks_path, id: "cancel", class: "btn btn-default"
+= f.submit "Save link", class: "btn btn-primary"

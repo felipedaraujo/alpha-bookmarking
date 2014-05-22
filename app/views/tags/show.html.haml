@@ -1,0 +1,3 @@
+%h3.center= @tag.name
+- @tag.bookmarks.each do |bookmark|
+  = render 'shared/bookmarks_list', bookmark: bookmark

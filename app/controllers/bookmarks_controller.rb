@@ -2,7 +2,8 @@ class BookmarksController < ApplicationController
   before_action :set_bookmark, only: [:show, :update, :destroy]
 
   def index
-    @bookmarks = Bookmark.paginate(page: params[:page], :per_page => 20)
+    @bookmarks = Bookmark.paginate(page: params[:page], 
+                                   :per_page => 20).order('created_at DESC')
   end
 
   def show
